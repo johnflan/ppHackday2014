@@ -51,23 +51,21 @@ def getMessages(groupId):
 @app.route("/chat/<groupId>", methods = ['POST'])
 def postMessage(groupId):
     username = request.args.get('username', 'none')
-    if(username != 'johnflan'):
+    if(isValidUser(username) == False):
         abort(401)
     message = request.form['message']
     print(groupId + " " + message + " " + str(int(time.time())))
-    return message
+    postedMessage = postMessage(groupId, username, message, int(time.time()), 0)
+    return Response(json.dumps(postedMessage),  mimetype='application/json')
 
 
-@app.route("/chat/<roomId>/<timestamp>", methods = ['GET'])
+@app.route("/chat/<groupId>/<timestamp>", methods = ['GET'])
 def getAllMessagesAfter(groupId, timestamp):
-    
     username = request.args.get('username', 'none')
-    if(username != 'johnflan'):
+    if(isValidUser(username) == False):
         abort(401)
-
-    message = {"timestamp": int(time.time() + 200), "username": "CowboyLavin", "message": "just posted a bet", "infoMessage": True}
-    messages = [message]
-    return json.dumps(messages)
+    messages = getMessagesAfter(groupId, timestamp)
+    return Response(json.dumps(messages),  mimetype='application/json')
 
 
 @app.route("/odds", methods = ['GET'])
@@ -170,10 +168,6 @@ def getLastMessages(groupid):
     cur = db.cursor()
     cur.execute(query)
     
-    #(1L, 1L, 'johnflan', 'Ahah ya c*nt.', 0L, 1401303781L)
-    #(2L, 10L, 'CowboyLavin', 'Can anyone lend a score.', 0L, 1401303825L)
-
-    
     for row in cur.fetchall():
         print(row)
         statusMessage = False
@@ -183,6 +177,41 @@ def getLastMessages(groupid):
                 "message": row[3], "info": statusMessage, "timestamp": row[5]}
         messages.append(message)
     return messages
+
+def getMessagesAfter(groupid, timestamp):
+    messages = []
+    query = "select message_id, users.user_id, user_name, message,info," + \
+            "timestamp from chat, users where chat.user_id = users.user_id and group_id" + \
+            " = " + groupid + " and timestamp > " + timestamp + " order by timestamp asc limit 100;"
+    print(query)
+    cur = db.cursor()
+    cur.execute(query)
+    
+    for row in cur.fetchall():
+        print(row)
+        statusMessage = False
+        if (row[4] == 1): 
+            statusMessage = True
+        message = {"messageId": row[0], "userId": row[1], "userName": row[2], "message": row[3], "info": statusMessage, "timestamp": row[5]}
+        messages.append(message)
+    
+    return messages
+
+def postMessage(groupid, username, message, timestamp, status):
+    userid = getUserId(username)
+    print(groupid, userid, message, status, timestamp)
+
+    query = """INSERT INTO chat (group_id, user_id, message, info, timestamp) VALUES (%s,%s,'%s',%s,%s)""" % (groupid, userid, message, status, timestamp)
+    cur = db.cursor()
+    cur.execute(query)
+
+def getUserId(username):
+    query = "select user_id from users where user_name = '" + username + "'"
+    cur = db.cursor()
+    cur.execute(query)
+
+    for row in cur.fetchall():
+        return row[0]
 
 if __name__ == "__main__":
         app.run(host="0.0.0.0", port=5000, debug=True)

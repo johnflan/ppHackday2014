@@ -27,13 +27,16 @@ def login():
 
 @app.route("/home", methods = ['GET'])
 def home():
+    username = request.args.get('username', "none")
+    key = request.args.get('key', "none")
     
-    if(username != johnflan):
+    if(username != "johnflan"):
         abort(401)
     else:
-        return "home for user " + user + " key:" + key
-    
-    return "home";
+        print(u"home for user " + username + " key:" + key)
+        payload = {"admin": True}    
+
+        return json.dumps(payload);
 
 if __name__ == "__main__":
-        app.run(host="0.0.0.0", port=5000)
+        app.run(host="0.0.0.0", port=5000, debug=True)

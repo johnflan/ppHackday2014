@@ -30,6 +30,7 @@
 		2D8C3D7C19378F1600612756 /* LoginScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C3D7A19378F1600612756 /* LoginScreenViewController.m */; };
 		2D8C3D861937AA0D00612756 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C3D851937AA0D00612756 /* ChatViewController.m */; };
 		2D8C3D891937C34500612756 /* StatsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C3D881937C34500612756 /* StatsTableTableViewController.m */; };
+		2D8C3D8C1937DFFD00612756 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C3D8B1937DFFC00612756 /* ChatMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,8 @@
 		2D8C3D851937AA0D00612756 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		2D8C3D871937C34500612756 /* StatsTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsTableTableViewController.h; sourceTree = "<group>"; };
 		2D8C3D881937C34500612756 /* StatsTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsTableTableViewController.m; sourceTree = "<group>"; };
+		2D8C3D8A1937DFFC00612756 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		2D8C3D8B1937DFFC00612756 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +196,8 @@
 				2D8C3D851937AA0D00612756 /* ChatViewController.m */,
 				2D8C3D871937C34500612756 /* StatsTableTableViewController.h */,
 				2D8C3D881937C34500612756 /* StatsTableTableViewController.m */,
+				2D8C3D8A1937DFFC00612756 /* ChatMessage.h */,
+				2D8C3D8B1937DFFC00612756 /* ChatMessage.m */,
 			);
 			path = ALaughABet;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				2D8C3D861937AA0D00612756 /* ChatViewController.m in Sources */,
 				2D8C3D891937C34500612756 /* StatsTableTableViewController.m in Sources */,
 				2D19010119360535003E8792 /* SelectionsTableViewController.m in Sources */,
+				2D8C3D8C1937DFFD00612756 /* ChatMessage.m in Sources */,
 				2D8C3D7C19378F1600612756 /* LoginScreenViewController.m in Sources */,
 				2D1900D01935FBEC003E8792 /* main.m in Sources */,
 			);

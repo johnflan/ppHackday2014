@@ -28,19 +28,15 @@
      {
          
          NSLog(@"Response : %@",response);
-         
-                  NSLog(@"Connection Error: %@",connectionError);
+         NSLog(@"Connection Error: %@",connectionError);
          
          if (data.length > 0 && connectionError == nil)
          {
              NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
                                                                       options:0
                                                                         error:NULL];
-
-             
              NSLog(@"%@",greeting);
              NSString *username = [greeting objectForKey:@"username"];
-             
              NSLog(@"blah blah blah %@",username);
              
          }

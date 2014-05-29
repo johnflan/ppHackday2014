@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatMessage.h"
 
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -16,6 +17,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *sendButton;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 
+@property NSString *latestTimetamp;
+@property NSMutableArray *chatMessages;
 
 
 - (IBAction) sendButtonPressed:(id)sender;

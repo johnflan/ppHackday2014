@@ -13,27 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self postRequest];
-//    [self configureRestKit];
     return YES;
-}
-
-- (void)postRequest
-{
-    NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"johnflan", @"username",
-                            @"1234", @"password",
-                            nil];
-    
-    [httpClient postPath:@"/login" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
 }
 
 - (void)configureRestKit

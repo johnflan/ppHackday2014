@@ -104,21 +104,39 @@
 }
 */
 
-/*
+
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+//    // Create the next view controller.
+//    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+//    
+//    // Pass the selected object to the new view controller.
+//    
+//    // Push the view controller.
+//    [self.navigationController pushViewController:detailViewController animated:YES];
     
-    // Pass the selected object to the new view controller.
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Confirm Order?"
+															 delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil
+													otherButtonTitles:@"Yes", @"No", nil];
     
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+	actionSheet.destructiveButtonIndex = 1;
+    [actionSheet showInView:self.view];
 }
-*/
+
+#pragma mark - Action Sheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSLog(@"Placed");
+    }
+    
+}
 
 @end

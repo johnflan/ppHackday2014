@@ -7,15 +7,68 @@
 //
 
 #import "AppDelegate.h"
+#import <RestKit/RestKit.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self postRequest];
+//    [self configureRestKit];
     return YES;
 }
-							
+
+- (void)postRequest
+{
+    NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"johnflan", @"username",
+                            @"1234", @"password",
+                            nil];
+    
+    [httpClient postPath:@"/login" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+}
+
+- (void)configureRestKit
+{
+
+    NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000/home?username=johnflan&key=1"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data, NSError *connectionError)
+     {
+         
+         NSLog(@"Response : %@",response);
+         
+                  NSLog(@"Connection Error: %@",connectionError);
+         
+         if (data.length > 0 && connectionError == nil)
+         {
+             NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:0
+                                                                        error:NULL];
+
+             
+             NSLog(@"%@",greeting);
+             NSString *username = [greeting objectForKey:@"username"];
+             
+             NSLog(@"blah blah blah %@",username);
+             
+         }
+     }];
+    
+
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

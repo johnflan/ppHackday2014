@@ -72,7 +72,6 @@
 
 - (void)sendButtonPressed:(id)sender
 {
-    NSLog(@"You've just sent a post request on login");
     NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
@@ -88,6 +87,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];
+    
+    _textField.text = @"";
 
 }
 

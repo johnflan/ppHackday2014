@@ -1,18 +1,27 @@
 //
-//  SelectionsTableViewController.m
+//  StatsTableTableViewController.m
 //  ALaughABet
 //
-//  Created by Lar Judge on 28/05/2014.
+//  Created by Lar Judge on 29/05/2014.
 //  Copyright (c) 2014 Lar Judge. All rights reserved.
 //
 
-#import "SelectionsTableViewController.h"
+#import "StatsTableTableViewController.h"
 
-@interface SelectionsTableViewController ()
+@interface StatsTableTableViewController ()
 
 @end
 
-@implementation SelectionsTableViewController
+@implementation StatsTableTableViewController
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -23,8 +32,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.title = @"Selections";
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,14 +44,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 5;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -57,12 +67,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
     }
-
-    cell.textLabel.text = @"Brazil";
+    
+    cell.textLabel.text = @"Stats Message";
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -102,39 +111,15 @@
 }
 */
 
+/*
+#pragma mark - Navigation
 
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Navigation logic may go here, for example:
-//    // Create the next view controller.
-//    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-//    
-//    // Pass the selected object to the new view controller.
-//    
-//    // Push the view controller.
-//    [self.navigationController pushViewController:detailViewController animated:YES];
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Confirm Order?"
-															 delegate:self
-                                                    cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil
-													otherButtonTitles:@"Yes", @"No", nil];
-    
-	actionSheet.destructiveButtonIndex = 1;
-    [actionSheet showInView:self.view];
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
-
-#pragma mark - Action Sheet Delegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-    {
-        NSLog(@"Placed");
-    }
-    
-}
+*/
 
 @end

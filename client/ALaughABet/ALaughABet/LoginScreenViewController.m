@@ -53,7 +53,7 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
      NSLog(@"Preparing for segue");
     if ([[segue identifier] isEqualToString:@"loginSegue"]){
-
+        
     }
 }
 
@@ -69,8 +69,16 @@
                             nil];
     
     [httpClient postPath:@"/login" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
+//        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                                 options:0
+                                                                   error:NULL];
+
+        
+
+        
+        NSLog(@"Request Successful, response '%@'", greeting);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];

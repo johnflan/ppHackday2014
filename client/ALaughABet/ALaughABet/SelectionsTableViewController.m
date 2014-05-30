@@ -15,6 +15,14 @@
 
 @implementation SelectionsTableViewController
 
+
+@synthesize currentSelectionName = _currentSelectionName;
+@synthesize currentSelectionPrice = _currentSelectionPrice;
+@synthesize selections = _selections;
+@synthesize prices = _prices;
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,6 +34,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.title = @"Selections";
+    
+    _selections = [NSArray arrayWithObjects:@"Brazil", @"Draw", @"Croatia", nil];
+    _prices = [NSArray arrayWithObjects:@"3/10", @"4/1", @"10/1", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,7 +54,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [_selections count];
 }
 
 
@@ -59,7 +70,7 @@
         
     }
 
-    cell.textLabel.text = @"Brazil";
+    cell.textLabel.text = [_selections objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -118,6 +129,9 @@
 //    // Push the view controller.
 //    [self.navigationController pushViewController:detailViewController animated:YES];
     
+    _currentSelectionName = [_selections objectAtIndex:indexPath.row];
+    _currentSelectionPrice = [_prices objectAtIndex:indexPath.row];
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Confirm Order?"
 															 delegate:self
                                                     cancelButtonTitle:nil
@@ -133,7 +147,7 @@
 {
     if (buttonIndex == 0)
     {
-        NSLog(@"Placed Bet on Brazil");
+        NSLog(@"Placed Bet on %@", _currentSelectionName);
         
         
         
@@ -143,7 +157,7 @@
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"johnflan", @"username",
                                 @"1234", @"password",
-                                @"bet on brazil", @"message",
+                                [NSString stringWithFormat:@"%@ @ %@", _currentSelectionName, _currentSelectionPrice], @"message",
                                 nil];
         
         [httpClient postPath:@"/bet/1?username=johnflan" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

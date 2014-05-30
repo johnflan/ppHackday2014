@@ -10,4 +10,11 @@
 
 @interface SelectionsTableViewController : UITableViewController
 
+
+@property NSString *currentSelectionName;
+@property NSString *currentSelectionPrice;
+
+@property NSArray *selections;
+@property NSArray *prices;
+
 @end

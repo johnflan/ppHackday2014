@@ -10,4 +10,6 @@
 
 @interface StatsTableTableViewController : UITableViewController
 
+@property NSArray *stats;
+
 @end

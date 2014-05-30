@@ -17,39 +17,55 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Fn-9y-x4y">
-                                <rect key="frame" x="51" y="87" width="84" height="21"/>
+                                <rect key="frame" x="33" y="86" width="84" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfl-DK-Vce">
-                                <rect key="frame" x="51" y="121" width="81" height="21"/>
+                                <rect key="frame" x="33" y="120" width="81" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="johnflan" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2A-wu-IlS">
-                                <rect key="frame" x="173" y="83" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="johnflan" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2A-wu-IlS">
+                                <rect key="frame" x="142" y="83" width="138" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wKd-lM-Iqu">
-                                <rect key="frame" x="173" y="121" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wKd-lM-Iqu">
+                                <rect key="frame" x="142" y="121" width="138" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQh-BB-ArU">
-                                <rect key="frame" x="117" y="186" width="122" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQh-BB-ArU">
+                                <rect key="frame" x="99" y="184" width="122" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97819674744897955" green="0.96792570630315633" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Login">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="e1D-Nc-Mad" eventType="touchUpInside" id="Pur-kI-Ibr"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mug_logo_proper" translatesAutoresizingMaskIntoConstraints="NO" id="GJi-wA-sYD">
+                                <rect key="frame" x="40" y="248" width="240" height="201"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -230,7 +246,7 @@
         <scene sceneID="Sgb-yk-1vw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0vS-eE-v0g" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Selections" image="first" id="bt5-mW-2lm"/>
+                    <tabBarItem key="tabBarItem" title="Selections" image="tasks_tabbar" id="bt5-mW-2lm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OGI-XQ-69S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -249,7 +265,7 @@
         <scene sceneID="YAA-OY-BZc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CHl-j0-ejX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Stats" image="first" id="vOK-TJ-Qn2"/>
+                    <tabBarItem key="tabBarItem" title="Stats" image="pendingorders_tabbar" id="vOK-TJ-Qn2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IIG-og-5UI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -268,7 +284,7 @@
         <scene sceneID="F6Z-Kx-5kn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RZu-zr-pJl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" image="first" id="4eW-Xg-E4P"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="information_tabbar" id="4eW-Xg-E4P"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lVf-Ek-pkr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -287,7 +303,7 @@
         <scene sceneID="g29-LS-epE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OII-3y-vKN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2TI-xL-V2j"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="customer_tabbar" id="2TI-xL-V2j"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cw8-Sm-Qot">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -304,7 +320,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="customer_tabbar" width="30" height="27"/>
+        <image name="information_tabbar" width="30" height="30"/>
+        <image name="mug_logo_proper" width="3509" height="3090"/>
+        <image name="pendingorders_tabbar" width="24" height="30"/>
+        <image name="tasks_tabbar" width="30" height="27"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -192,7 +192,7 @@
     if (cell == nil) {
         
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     ChatMessage *message = [_chatMessages objectAtIndex:indexPath.row];

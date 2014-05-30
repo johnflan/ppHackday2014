@@ -17,4 +17,16 @@
 @property NSArray *selections;
 @property NSArray *prices;
 
+
+@property NSArray *selections2;
+@property NSArray *prices2;
+
+
+@property NSArray *selections3;
+@property NSArray *prices3;
+
+
+@property NSArray *selections4;
+@property NSArray *prices4;
+
 @end

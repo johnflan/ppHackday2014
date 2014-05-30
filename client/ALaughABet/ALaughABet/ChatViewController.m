@@ -37,11 +37,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _chatMessages = [[NSMutableArray alloc] init];
+   
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _textField.delegate = self;
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStyleBordered target:self action:@selector(downloadMessageHistory)];
     
     [self downloadMessageHistory];
     
@@ -50,6 +53,9 @@
 
 - (void)downloadMessageHistory
 {
+    
+     _chatMessages = [[NSMutableArray alloc] init];
+    
     NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000/chat/1?username=johnflan&key=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
@@ -68,7 +74,9 @@
              NSArray *userNameArray = [greeting valueForKey:@"userName"];
              NSArray *messageArray = [greeting valueForKey:@"message"];
              NSArray *timestampArray = [greeting valueForKey:@"timestamp"];
+             NSArray *infoArray = [greeting valueForKey:@"info"];
              
+             NSLog(@"info value%@",[greeting valueForKey:@"info"]);
              
              
              
@@ -78,6 +86,7 @@
                  message.username = [userNameArray objectAtIndex:i];
                  message.message = [messageArray objectAtIndex:i];
                  message.timestamp = [timestampArray objectAtIndex:i];
+                 message.info = [infoArray objectAtIndex:i];
                  
                  NSLog(@"Messages %@ %@ %@", message.username, message.message, message.timestamp);
                  [_chatMessages addObject:message];
@@ -86,6 +95,10 @@
              ChatMessage *latestMessage = [_chatMessages lastObject];
              _latestTimetamp = latestMessage.timestamp;
              
+             
+             [self.tableView reloadData];
+             if (self.chatMessages.count > 0)
+                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chatMessages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
          }
      }];
 }
@@ -101,54 +114,12 @@
                                              selector:@selector(keyboardWasHidden:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-    
-      NSTimer *timer = [NSTimer timerWithTimeInterval:0.5
-                                                 target:self
-                                               selector:@selector(timerFired:)
-                                               userInfo:nil repeats:YES];
-        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+
     
     [self.tableView reloadData];
     
 }
 
--(void)timerFired:(NSNotification *)aNotification
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://10.104.98.186:5000/chat/1/%@?username=johnflan&key=1", _latestTimetamp]];
-    
-    NSLog(@"timer request : %@", url);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response,
-                                               NSData *data, NSError *connectionError)
-     {
-         if (data.length > 0 && connectionError == nil)
-         {
-             NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
-                                                                      options:0
-                                                                        error:NULL];
-             NSLog(@"%@",greeting);
-             
-             
-             ChatMessage *message = [[ChatMessage alloc] init];
-             message.username = [greeting valueForKey:@"userName"];
-             
-             message.message = [greeting valueForKey:@"message"];
-             message.timestamp = [greeting valueForKey:@"timestamp"];
-             
-//             NSLock *arrayLock = [[NSLock alloc] init];
-//             [arrayLock lock];
-//             [_chatMessages addObject:message];
-//             [arrayLock unlock];
-
-             
-             _latestTimetamp = message.timestamp;
-         }
-     }];
-    
-    [self.tableView reloadData];
-}
 
 
 - (void)didReceiveMemoryWarning
@@ -186,8 +157,15 @@
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];
     
-    _textField.text = @"";
+
     
+//ChatMessage *message = [[ChatMessage alloc] init];
+//    message.message = _textField.text;
+    _textField.text = @"";
+//    [_chatMessages addObject:message];
+    
+    
+    [self downloadMessageHistory];
     [self.tableView reloadData];
 }
 
@@ -213,14 +191,23 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
         
     }
     
     ChatMessage *message = [_chatMessages objectAtIndex:indexPath.row];
-    cell.textLabel.text = message.message;
-    NSLog(@"%d", indexPath.row);
-    NSLog(@"cell text label text : %@", cell.textLabel.text);
+    cell.textLabel.text = message.username;
+        cell.detailTextLabel.text = message.message;
+    
+    if ([message.info isEqual:@"true"]) {
+        cell.textColor = [UIColor purpleColor];
+        cell.detailTextLabel.textColor = [UIColor purpleColor];
+    }
+    
+    else {
+        cell.textColor = [UIColor blueColor];
+        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+    }
     
     return cell;
 }
@@ -286,6 +273,9 @@
     self.navigationItem.rightBarButtonItem = nil;
     
     [self.tableView reloadData];
+    if (self.chatMessages.count > 0)
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chatMessages.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated

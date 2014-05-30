@@ -13,6 +13,7 @@
 @property NSString *username;
 @property NSString *message;
 @property NSString *timestamp;
+@property NSString *info;
 
 -(void)print;
 @end

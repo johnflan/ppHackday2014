@@ -13,6 +13,7 @@
 @synthesize username = _username;
 @synthesize message = _message;
 @synthesize timestamp = _timestamp;
+@synthesize info = _info;
 
 -(void)print
 {

@@ -7,6 +7,7 @@
 //
 
 #import "SelectionsTableViewController.h"
+#import <RestKit/RestKit.h>
 
 @interface SelectionsTableViewController ()
 
@@ -132,7 +133,27 @@
 {
     if (buttonIndex == 0)
     {
-        NSLog(@"Placed");
+        NSLog(@"Placed Bet on Brazil");
+        
+        
+        
+        NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000"];
+        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"johnflan", @"username",
+                                @"1234", @"password",
+                                @"bet on brazil", @"message",
+                                nil];
+        
+        [httpClient postPath:@"/bet/1?username=johnflan" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"Request Successful, response '%@'", responseStr);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        }];
+        
+        
     }
     
 }

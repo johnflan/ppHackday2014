@@ -20,6 +20,7 @@
 @property NSString *latestTimetamp;
 @property NSMutableArray *chatMessages;
 
+@property (assign) NSString *userName;
 
 - (IBAction) sendButtonPressed:(id)sender;
 

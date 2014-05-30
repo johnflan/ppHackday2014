@@ -8,6 +8,7 @@
 
 #import "LoginScreenViewController.h"
 #import <RestKit/RestKit.h>
+#import "ChatViewController.h"
 
 @interface LoginScreenViewController ()
 
@@ -56,11 +57,18 @@
      NSLog(@"Preparing for segue");
     if ([[segue identifier] isEqualToString:@"loginSegue"]){
         
+//        ChatViewController *destViewController =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ChatVC"];
+//        
+//
+//        [destViewController setTitle:@"something"];
     }
 }
 
 - (void)postRequest
 {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     NSLog(@"You've just sent a post request on login");
     NSURL *url = [NSURL URLWithString:@"http://10.104.98.186:5000"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -77,13 +85,23 @@
                                                                  options:0
                                                                    error:NULL];
 
-        
-
-        
+      
+        NSLog(@"greeting %@", greeting);
+        NSLog(@"greeting user name %@",[greeting valueForKey:@"username"]);
+                NSLog(@"greeting group name %@",[greeting valueForKey:@"groupName"]);
         NSLog(@"Request Successful, response '%@'", greeting);
+        
+        [defaults setObject:[greeting valueForKey:@"username"] forKey:@"userName"];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];
+    
+
+    
+//    [defaults setObject:@"groupName" forKey:@"groupName"];
+    
+
 }
 
 @end

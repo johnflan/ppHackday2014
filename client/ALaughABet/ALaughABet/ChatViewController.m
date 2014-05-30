@@ -23,6 +23,8 @@
 
 @synthesize latestTimetamp = _latestTimetamp;
 
+@synthesize userName = _userName;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,6 +40,15 @@
     // Do any additional setup after loading the view.
     
        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"stripes.png"]];
+    
+    
+    NSUserDefaults *fetchDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // getting an NSString
+    NSString *message = [fetchDefaults objectForKey:@"username"];
+    
+//    NSLog(@"title message %@",message);
+    self.title = @"Inside Job";
     
     _tableView.dataSource = self;
     _tableView.delegate = self;

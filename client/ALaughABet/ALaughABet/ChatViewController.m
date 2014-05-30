@@ -37,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-   
+       self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"stripes.png"]];
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
